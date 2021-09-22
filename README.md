@@ -49,3 +49,6 @@ Copy the link to add the bot to your server after running the python file, make 
 
 Commands are listed above.
 
+
+
+Note: There is a sentiment analysis to check for negative inputs/outputs in the code. It is currently set about in the middle.
