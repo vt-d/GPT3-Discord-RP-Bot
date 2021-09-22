@@ -7,8 +7,9 @@ import openai
 ##########
 #Settings#
 ##########
+
 #OpenAI API key
-openai.api_key = "OPENAI API KEY"
+openai.api_key = "OPENAI KEY"
 
 #Discord key
 dkey = 'DISCORD KEY'
@@ -23,6 +24,7 @@ cache = None
 qcache = None
 chat_log = None
 running = False
+
 # Enable logging
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
                     level=logging.INFO)
@@ -33,78 +35,26 @@ completion = openai.Completion()
 ##################
 #Command handlers#
 ##################
-def start():
-    """Send a message when the command /start is issued."""
-    global user
-    global chat_log
-    global cache
-    global qcache
-    global running
-    global botname
-    user = 'Human'
-    botname = 'AI'
-    chat_log = None
-    cache = None
-    qcache = None
-    running = True
-    return
 
-def stop():
-    """Send a message when the command /stop is issued."""
-    global user
-    global chat_log
-    global cache
-    global qcache
-    global running
-    global botname
-    user = 'Human'
-    botname = 'AI'
-    chat_log = None
-    cache = None
-    qcache = None
-    running = False
-    return
-
-def reset():
-    """Send a message when the command /reset is issued."""
-    global username
-    global botname
-    global chat_log
-    global cache
-    global qcache
-    global botname
-    username = 'Human'
-    botname = 'AI'
-    chat_log = None
-    cache = None
-    qcache = None
-    return
-
-def retry(message):
+def retry(message, username, botname):
     """Send a message when the command /retry is issued."""
     global chat_log
     global cache
     global qcache
-    global running
-    global username
-    global botname
     new = True
-    rep = interact(message, new)
+    rep = interact(message, username, botname, new)
     return rep
 
 ################
 #Main functions#
 ################
 
-def run(message):
+def run(message, username, botname):
     global chat_log
     global cache
     global qcache
-    global running
-    global username
-    global botname
     new = False
-    rep = interact(message, new)
+    rep = interact(message, username, botname, new)
     return rep
 
 def ask(username, botname, question, chat_log=None):
@@ -124,15 +74,12 @@ def append_interaction_to_chat_log(username, botname, question, answer, chat_log
         chat_log = username + ': Hello, how are you?\n ' + botname + ': I am doing great. How can I help you today?\n'
     return f'{chat_log}{username}: {question}\n{botname}: {answer}\n'
 	
-def interact(update, new):
+def interact(message, username, botname, new):
     global chat_log
     global cache
     global qcache
-    global botname
-    global username
     print("==========START==========")
-    tex = update
-    text = str(tex)
+    text = str(message)
     analyzer = SentimentIntensityAnalyzer()
     if new != True:
         vs = analyzer.polarity_scores(text)
@@ -156,8 +103,7 @@ def interact(update, new):
         cache = chat_log
     try:
         print('TEST')
-        aka = str(username)
-        answer = ask(aka, botname, question, chat_log)
+        answer = ask(username, botname, question, chat_log)
         print('TEST')
         if debug == True:
             print("Input:\n" + question)
@@ -173,7 +119,7 @@ def interact(update, new):
         if vs['neg'] > 0.7:
             rep = 'Output text is not positive. Censoring. Use /retry to get positive output.'
             return rep
-        chat_log = append_interaction_to_chat_log(aka, botname, question, answer, chat_log)
+        chat_log = append_interaction_to_chat_log(username, botname, question, answer, chat_log)
         print(chat_log)
         return out
 
@@ -186,10 +132,6 @@ def interact(update, new):
 # End main functions#
 #####################
 
-def error(bot, update):
-    """Log Errors caused by Updates."""
-    logger.warning('Update "%s" caused error "%s"', update)
-
 class MyClient(discord.Client):
     async def on_ready(self):
         print(f'Logged in as {self.user} (ID: {self.user.id})')
@@ -199,17 +141,34 @@ class MyClient(discord.Client):
         global running
         global botname
         global username
+        global chat_log
+        global cache
+        global qcache
         # we do not want the bot to reply to itself
         if message.author.id == self.user.id:
             return
         if message.content.startswith('!start'):
-            start()
+            user = 'Human'
+            botname = 'AI'
+            chat_log = None
+            cache = None
+            qcache = None
+            running = True
             await message.reply('You have started the bot. Commands are !start, !stop, !character (name of your desired rp partner), and !rp (text)', mention_author=False)
         if message.content.startswith('!stop'):
-            stop()
+            user = 'Human'
+            botname = 'AI'
+            chat_log = None
+            cache = None
+            qcache = None
+            running = False
             await message.reply('You have stopped the bot.', mention_author=False)
         if message.content.startswith('!reset'):
-            reset()
+            username = 'Human'
+            botname = 'AI'
+            chat_log = None
+            cache = None
+            qcache = None
             await message.reply('You have reset the bot.', mention_author=False)
         if message.content.startswith('!character'):
             botname = re.search(r'(?<=!character ).*[^.]*', message.content)
@@ -220,14 +179,14 @@ class MyClient(discord.Client):
         if message.content and running == True:
             if message.content.startswith('!retry'):
                 conts = 'null'
-                rep = retry(conts)
+                rep = retry(conts, username, botname)
                 await message.reply(rep, mention_author=False)
             if message.content.startswith('!rp'):
                 content = re.search(r'(?<=!rp ).*[^.]*', message.content)
                 cont = content.group(0)
                 conts = str(cont)
                 username = str(message.author)
-                rep = run(conts)
+                rep = run(conts, username, botname)
                 await message.reply(rep, mention_author=False)
 
 if __name__ == '__main__':
