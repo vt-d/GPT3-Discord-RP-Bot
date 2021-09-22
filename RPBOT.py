@@ -38,9 +38,6 @@ completion = openai.Completion()
 
 def retry(message, username, botname):
     """Send a message when the command /retry is issued."""
-    global chat_log
-    global cache
-    global qcache
     new = True
     rep = interact(message, username, botname, new)
     return rep
@@ -50,9 +47,6 @@ def retry(message, username, botname):
 ################
 
 def run(message, username, botname):
-    global chat_log
-    global cache
-    global qcache
     new = False
     rep = interact(message, username, botname, new)
     return rep
