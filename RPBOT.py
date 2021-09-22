@@ -15,9 +15,6 @@ dkey = 'DISCORD KEY'
 
 # Lots of console output
 debug = True
-# User Session timeout
-timstart = 300
-
 
 #Defaults
 user = 'Human'
@@ -235,4 +232,3 @@ class MyClient(discord.Client):
 if __name__ == '__main__':
     client = MyClient()
     client.run(dkey)
-# https://discord.com/api/oauth2/authorize?client_id=890033105325400075&permissions=68608&redirect_uri=https%3A%2F%2Fdiscord.com%2Fapi%2Foauth2%2Fauthorize%3Fclient_id%3D890033105325400075&scope=bot
