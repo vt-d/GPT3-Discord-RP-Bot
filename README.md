@@ -15,39 +15,36 @@ Commands are:
 Set these variables in the python file:
 ```
 #OpenAI API key
-openai.api_key = "OPENAI API KEY"
+openai.api_key = "OPENAI KEY"
 
 #Discord key
 dkey = 'DISCORD KEY'
-
 ```
 
-
-```
+### Setup OpenAI
 1. To obtain the openai API key, visit their website and register for one:
 https://beta.openai.com/ 
 
-Click join the waitlist, and wait for a email (this can take a LONG time, like months.)
+2. Click join the waitlist, and wait for a email (this can take a LONG time, like months.)
 
-Then put the key into the API key spot for OpenAI in the python file.
+3. Put the key into the API key spot for OpenAI in the python file.
 
-2. On discord developers page here:
-https://discord.com/developers/applications
+### Setup Discord Bot
+1. On discord developers page here:
+https://discord.com/developers/applications 
 
-Create a new application, give it a name such as "RP-Bot"
-
+2. Create a new application, give it a name such as "RP-Bot"
 Set a avatar if you wish.
-
 Set a description and save changes.
 
-Then click bot and click add bot.
+3. Click bot and click add bot.
 
-Hit yes, then copy the token and put it in the python file replacing "DISCORD KEY"
+4. Hit yes, then copy the token and put it in the python file replacing "DISCORD KEY"
 
-Then open the Oauth tab.
+5. Open the Oauth tab. Checkmark "Bot" then below that check "Read message history" and "Send Messages."
 
-Checkmark "Bot" then below that check "Read message history" and "Send Messages."
+6. Copy the link to add the bot to your server after running the python file, make sure to install requirements with pip.
 
-Copy the link to add the bot to your server after running the python file, make sure to install requirements with pip.
 ```
 Note: There is a sentiment analysis to check for negative inputs/outputs in the code. It is currently set about in the middle.
+```
