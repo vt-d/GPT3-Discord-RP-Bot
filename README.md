@@ -22,11 +22,12 @@ dkey = 'DISCORD KEY'
 
 ```
 
-To obtain openai key, visit their website and register for one:
+
+```
+To obtain the openai API key, visit their website and register for one:
 https://beta.openai.com/ Click join the waitlist, and wait for a email (this can take a LONG time, like months.)
 
 Then put the key into the API key spot for OpenAI in the python file.
-
 
 On discord developers page here:
 https://discord.com/developers/applications
@@ -48,7 +49,7 @@ Checkmark "Bot" then below that check "Read message history" and "Send Messages.
 Copy the link to add the bot to your server after running the python file, make sure to install requirements with pip.
 
 Commands are listed above.
-
+```
 
 
 Note: There is a sentiment analysis to check for negative inputs/outputs in the code. It is currently set about in the middle.
