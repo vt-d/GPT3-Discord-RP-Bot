@@ -1,5 +1,6 @@
 # GPT3-Discord-RP-Bot
-Discord GPT-3 OpenAI roleplay bot, using your discord handle and a character you set the bot to.
+Discord GOpenAI/GPT-3 roleplay chatbot.
+Harvests AI and username/character intelligence.
 
 Commands are:
 ```
