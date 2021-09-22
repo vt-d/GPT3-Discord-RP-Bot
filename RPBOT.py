@@ -139,7 +139,7 @@ def interact(update, new):
         if debug == True:
             print("Sentiment of input:\n")
             print(vs)
-        if vs['neg'] > 0:
+        if vs['neg'] > 0.7:
             rep = 'Input text is not positive. Input text must be of positive sentiment/emotion.'
             return rep
     if new == True:
@@ -170,7 +170,7 @@ def interact(update, new):
         if debug == True:
             print("Sentiment of output:\n")
             print(vs)
-        if vs['neg'] > 0:
+        if vs['neg'] > 0.7:
             rep = 'Output text is not positive. Censoring. Use /retry to get positive output.'
             return rep
         chat_log = append_interaction_to_chat_log(aka, botname, question, answer, chat_log)
