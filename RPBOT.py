@@ -174,6 +174,7 @@ def interact(update, new):
             rep = 'Output text is not positive. Censoring. Use /retry to get positive output.'
             return rep
         chat_log = append_interaction_to_chat_log(aka, botname, question, answer, chat_log)
+        print(chat_log)
         return out
 
     except Exception as e:
