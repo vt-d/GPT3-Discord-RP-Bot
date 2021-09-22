@@ -1,5 +1,6 @@
 # GPT3-Discord-RP-Bot
-Discord OpenAI/GPT-3 roleplay chatbot.
+Discord OpenAi roleplay chatbot.
+
 Harvests AI and username/character intelligence.
 
 Commands are:
