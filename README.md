@@ -27,7 +27,7 @@ https://beta.openai.com/
 
 2. Click join the waitlist, and wait for a email (this can take a LONG time, like months.)
 
-3. Put the key into the API key spot for OpenAI in the python file.
+3. Put the key into the API key spot for OpenAI in the python file from the API settings on the OpenAI webpage once you get an account.
 
 ### Setup Discord Bot
 1. On discord developers page here:
