@@ -18,8 +18,6 @@ dkey = 'DISCORD KEY'
 debug = True
 
 #Defaults
-user = 'Human'
-botname = 'AI'
 cache = None
 qcache = None
 chat_log = None
@@ -31,6 +29,11 @@ logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s
 logger = logging.getLogger(__name__)
 
 completion = openai.Completion()
+
+# Please don't edit these without reading the main function.
+user = 'Human'
+botname = 'AI'
+
 
 ##################
 #Command handlers#
