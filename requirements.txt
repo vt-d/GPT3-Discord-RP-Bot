@@ -2,4 +2,3 @@ discord.py
 VaderSentiment
 openai
 regex
-nltk
