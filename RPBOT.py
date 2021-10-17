@@ -18,10 +18,14 @@ dkey = 'DISCORD KEY'
 debug = True
 
 #Defaults
+user = 'Human'
+botname = 'AI'
 cache = None
 qcache = None
 chat_log = None
 running = False
+# Max chat log length (A token is about 4 letters and max tokens is 2048)
+max = int(3000)
 
 # Enable logging
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
@@ -29,11 +33,6 @@ logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s
 logger = logging.getLogger(__name__)
 
 completion = openai.Completion()
-
-# Please don't edit these without reading the main function.
-user = 'Human'
-botname = 'AI'
-
 
 ##################
 #Command handlers#
@@ -48,6 +47,16 @@ def retry(message, username, botname):
 ################
 #Main functions#
 ################
+
+def limit(text, max):
+    if (len(text) >= max):
+        inv = max * -1
+        print("Reducing length of chat history... This can be a bit buggy.")
+        nl = text[inv:]
+        text = re.search(r'(?<=\n)[\s\S]*', nl).group(0)
+        return text
+    else:
+        return text
 
 def run(message, username, botname):
     new = False
@@ -69,6 +78,7 @@ def ask(username, botname, question, chat_log=None):
 def append_interaction_to_chat_log(username, botname, question, answer, chat_log=None):
     if chat_log is None:
         chat_log = username + ': Hello, how are you?\n ' + botname + ': I am doing great. How can I help you today?\n'
+    chat_log = limit(chat_log, max)
     return f'{chat_log}{username}: {question}\n{botname}: {answer}\n'
 	
 def interact(message, username, botname, new):
@@ -83,7 +93,7 @@ def interact(message, username, botname, new):
         if debug == True:
             print("Sentiment of input:\n")
             print(vs)
-        if vs['neg'] > 0.7:
+        if vs['neg'] > 1:
             rep = 'Input text is not positive. Input text must be of positive sentiment/emotion.'
             return rep
     if new == True:
@@ -113,7 +123,7 @@ def interact(message, username, botname, new):
         if debug == True:
             print("Sentiment of output:\n")
             print(vs)
-        if vs['neg'] > 0.7:
+        if vs['neg'] > 1:
             rep = 'Output text is not positive. Censoring. Use /retry to get positive output.'
             return rep
         chat_log = append_interaction_to_chat_log(username, botname, question, answer, chat_log)
