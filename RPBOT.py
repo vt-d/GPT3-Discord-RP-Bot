@@ -25,7 +25,7 @@ qcache = None
 chat_log = None
 running = False
 # Max chat log length (A token is about 4 letters and max tokens is 2048)
-max = int(1500)
+max = int(3000)
 
 # Enable logging
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
