@@ -1,6 +1,8 @@
 # GPT3-Discord-RP-Bot
 Discord OpenAi roleplay chatbot. Harvests AI and username/character intelligence.
 
+[![security: bandit](https://img.shields.io/badge/security-bandit-yellow.svg)](https://github.com/PyCQA/bandit)
+
 Commands are:
 ```
 !start
