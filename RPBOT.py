@@ -17,7 +17,7 @@ else:
 print(aienv)
 
 #Discord bot key
-tgenv = os.getenv('DISCORD_KEY')
+denv = os.getenv('DISCORD_KEY')
 if denv == None:
     dkey = "YOUR DISCORD BOT KEY GOES HERE"
 else:
