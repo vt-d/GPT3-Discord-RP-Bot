@@ -9,10 +9,20 @@ import openai
 ##########
 
 #OpenAI API key
-openai.api_key = "OPENAI KEY"
+aienv = os.getenv('OPENAI_KEY')
+if aienv == None:
+    openai.api_key = "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"
+else:
+    openai.api_key = aienv
+print(aienv)
 
-#Discord key
-dkey = 'DISCORD KEY'
+#Discord bot key
+tgenv = os.getenv('DISCORD_KEY')
+if denv == None:
+    dkey = "2032589621:AAHOivHy68ZKoicZGuFN09vcktc7hwx1vpY"
+else:
+    dkey = denv
+print(denv)
 
 # Lots of console output
 debug = True
