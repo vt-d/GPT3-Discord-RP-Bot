@@ -65,7 +65,7 @@ def run(message, username, botname):
 
 def ask(username, botname, question, chat_log=None):
     if chat_log is None:
-        chat_log = username + ': Hello, how are you?\n ' + botname + ': I am doing great. How can I help you today?\n'
+        chat_log = username + ': Hello, how are you?\n' + botname + ': I am doing great. How can I help you today?\n'
 
     prompt = f'{chat_log}{username}: {question}\n{botname}:'
     response = completion.create(
@@ -77,7 +77,7 @@ def ask(username, botname, question, chat_log=None):
 
 def append_interaction_to_chat_log(username, botname, question, answer, chat_log=None):
     if chat_log is None:
-        chat_log = username + ': Hello, how are you?\n ' + botname + ': I am doing great. How can I help you today?\n'
+        chat_log = username + ': Hello, how are you?\n' + botname + ': I am doing great. How can I help you today?\n'
     chat_log = limit(chat_log, max)
     return f'{chat_log}{username}: {question}\n{botname}: {answer}\n'
 	
