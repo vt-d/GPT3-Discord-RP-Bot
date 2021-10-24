@@ -11,7 +11,7 @@ import openai
 #OpenAI API key
 aienv = os.getenv('OPENAI_KEY')
 if aienv == None:
-    openai.api_key = "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"
+    openai.api_key = "YOUR OPENAI API KEY GOES HERE"
 else:
     openai.api_key = aienv
 print(aienv)
@@ -19,7 +19,7 @@ print(aienv)
 #Discord bot key
 tgenv = os.getenv('DISCORD_KEY')
 if denv == None:
-    dkey = "2032589621:AAHOivHy68ZKoicZGuFN09vcktc7hwx1vpY"
+    dkey = "YOUR DISCORD BOT KEY GOES HERE"
 else:
     dkey = denv
 print(denv)
