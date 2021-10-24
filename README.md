@@ -2,7 +2,7 @@
 Discord OpenAi roleplay chatbot. Harvests AI and username/character intelligence.
 
 [![security: bandit](https://img.shields.io/badge/security-bandit-yellow.svg)](https://github.com/PyCQA/bandit)
-
+[![Python 3.9.7](https://img.shields.io/badge/python-3.9.7-blue.svg)](https://www.python.org/downloads/release/python-397/)
 Commands are:
 ```
 !start
