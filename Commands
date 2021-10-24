@@ -1,0 +1,2 @@
+docker build -t bots/discord .
+docker run -h telegram --name telegram -d bots/discord
