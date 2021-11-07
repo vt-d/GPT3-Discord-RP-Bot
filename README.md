@@ -11,7 +11,7 @@ Commands are:
 !reset
 !rp (text)
 !botname (name of character you want to rp with, default is "AI")
-!username (your character, default is "Human"
+!username (your character, default is "Human")
 ```
 
 
