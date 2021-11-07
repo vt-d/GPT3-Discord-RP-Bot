@@ -76,11 +76,13 @@ def run(message, username, botname):
 def ask(username, botname, question, chat_log=None):
     if chat_log is None:
         chat_log = 'The following is a roleplay between two users:\n\n'
-
-    prompt = f'{chat_log}{username}: {question}\n{botname}:'
+    now = datetime.now()
+    ampm = now.strftime("%I:%M %p")
+    t = '[' + ampm + '] '
+    prompt = f'{chat_log}{t}{username}: {question}\n{t}{botname}:'
     response = completion.create(
-        prompt=prompt, engine="davinci", stop=['\n'], temperature=0.5,
-        top_p=0.9, frequency_penalty=0, presence_penalty=2, best_of=2,
+        prompt=prompt, engine="davinci", stop=['\n'], temperature=0.9,
+        top_p=1, frequency_penalty=15, presence_penalty=2, best_of=3,
         max_tokens=250)
     answer = response.choices[0].text.strip()
     return answer
@@ -89,7 +91,10 @@ def append_interaction_to_chat_log(username, botname, question, answer, chat_log
     if chat_log is None:
         chat_log = 'The following is a roleplay between two users:\n\n'
     chat_log = limit(chat_log, max)
-    return f'{chat_log}{username}: {question}\n{botname}: {answer}\n'
+    now = datetime.now()
+    ampm = now.strftime("%I:%M %p")
+    t = '[' + ampm + '] '
+    return f'{chat_log}{t}{username}: {question}\n{t}{botname}: {answer}\n'
 	
 def interact(message, username, botname, new):
     global chat_log
@@ -171,7 +176,7 @@ class MyClient(discord.Client):
             cache = None
             qcache = None
             running = True
-            await message.reply('You have started the bot. Commands are !start, !stop, !character (name of your desired rp partner), and !rp (text)', mention_author=False)
+            await message.reply('You have started the bot. Commands are !start, !stop, !botname (name of your desired rp partner), !username (your rp character) and !rp (text)', mention_author=False)
         if message.content.startswith('!stop'):
             user = 'Human'
             botname = 'AI'
@@ -187,11 +192,17 @@ class MyClient(discord.Client):
             cache = None
             qcache = None
             await message.reply('You have reset the bot.', mention_author=False)
-        if message.content.startswith('!character'):
-            botname = re.search(r'(?<=!character ).*[^.]*', message.content)
+        if message.content.startswith('!botname'):
+            botname = re.search(r'(?<=!botname ).*[^.]*', message.content)
             name = botname.group(0)
             botname = str(name)
-            reply = 'Bot Character Name Is: ' + botname
+            reply = 'Bot character set to: ' + botname
+            await message.reply(reply, mention_author=False)
+        if message.content.startswith('!username'):
+            username = re.search(r'(?<=!username ).*[^.]*', message.content)
+            name = username.group(0)
+            username = str(name)
+            reply = 'Your character set to: ' + username
             await message.reply(reply, mention_author=False)
         if message.content and running == True:
             if message.content.startswith('!retry'):
@@ -202,7 +213,6 @@ class MyClient(discord.Client):
                 content = re.search(r'(?<=!rp ).*[^.]*', message.content)
                 cont = content.group(0)
                 conts = str(cont)
-                username = str(message.author)
                 rep = run(conts, username, botname)
                 await message.reply(rep, mention_author=False)
 
