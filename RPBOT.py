@@ -75,19 +75,19 @@ def run(message, username, botname):
 
 def ask(username, botname, question, chat_log=None):
     if chat_log is None:
-        chat_log = 'The following is a chat between ' + username + ' and ' + botname + '.\n'
+        chat_log = 'The following is a roleplay between two users:\n\n'
 
     prompt = f'{chat_log}{username}: {question}\n{botname}:'
     response = completion.create(
-        prompt=prompt, engine="davinci", stop=['\n'], temperature=1,
-        top_p=0.9, frequency_penalty=3.00, presence_penalty=0.25, best_of=1,
+        prompt=prompt, engine="davinci", stop=['\n'], temperature=0.5,
+        top_p=0.9, frequency_penalty=0, presence_penalty=2, best_of=1,
         max_tokens=250)
     answer = response.choices[0].text.strip()
     return answer
 
 def append_interaction_to_chat_log(username, botname, question, answer, chat_log=None):
     if chat_log is None:
-        chat_log = 'The following is a chat between ' + username + ' and ' + botname + '.\n'
+        chat_log = 'The following is a roleplay between two users:\n\n'
     chat_log = limit(chat_log, max)
     return f'{chat_log}{username}: {question}\n{botname}: {answer}\n'
 	
