@@ -10,7 +10,8 @@ Commands are:
 !stop
 !reset
 !rp (text)
-!character (name of character you want to rp with)
+!botname (name of character you want to rp with, default is "AI")
+!username (your character, default is "Human"
 ```
 
 
